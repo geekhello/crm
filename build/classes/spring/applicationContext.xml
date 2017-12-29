@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:tx="http://www.springframework.org/schema/tx"  
+	xsi:schemaLocation=" 
+        http://www.springframework.org/schema/beans  
+        http://www.springframework.org/schema/beans/spring-beans.xsd  
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop  
+		http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/tx   
+		http://www.springframework.org/schema/tx/spring-tx.xsd">
+        <!-- 配置spring模板类对象  依赖会话工厂-->
+        <bean id="hibernateTemplate" class="org.springframework.orm.hibernate5.HibernateTemplate">
+        	<property name="sessionFactory" ref="sessionFactory"></property>
+        </bean>
+    	<!-- 配置sessionFactory 
+    			1.数据源
+    			2.hibernate映射文件
+    	-->
+    	<bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+    		<property name="dataSource" ref="dataSource"></property>
+    		<property name="configLocations" value="classpath:hibernate/hibernate.cfg.xml"></property>
+    	</bean>
+    	
+    	<!-- 配置c3p0数据源 -->
+    	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+    		<property name="driverClass" value="com.mysql.jdbc.Driver"></property>
+	 		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/crm"></property>
+	 		<property name="user" value="root"></property>
+	 		<property name="password" value="123456"></property>
+    	</bean>
+    	
+    	<import resource="classpath:spring/applicationContext-action.xml"/>
+    	<import resource="classpath:spring/applicationContext-service.xml"/>
+    	<import resource="classpath:spring/applicationContext-dao.xml"/>
+    	<!-- <import resource="classpath:spring/applicationContext-transaction.xml"/> -->
+</beans>

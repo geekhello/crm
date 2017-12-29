@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+   <hibernate-mapping package="com.crm.domain">
+   <!-- 配置实体类名和表名的映射关系 -->
+   		<class name="CstLinkMan" table="cst_linkman">
+   		<!-- 配置数据库表主键的映射关系 -->
+   			<id name="lkmId" column="lkm_id">
+   				<generator class="native"></generator>
+   			</id>
+   			<!-- 普通字段的映射关系 -->
+   			<property name="lkmName" column="lkm_name"></property>
+   			<property name="lkmGender" column="lkm_gender"></property>
+   			<property name="lkmPhone" column="lkm_phone"></property>
+   			<property name="lkmMobile" column="lkm_mobile"></property>
+   			<property name="lkmEmail" column="lkm_email"></property>
+   			<property name="lkmPosition" column="lkm_position"></property>
+   			<property name="lkmMemo" column="lkm_memo"></property>
+   			
+   			<!-- 多对一关系映射 -->
+   			<many-to-one name="customer" class="com.crm.domain.CstCustomer" column="lkm_cust_id"  lazy="false"></many-to-one>
+   		</class>
+   </hibernate-mapping>

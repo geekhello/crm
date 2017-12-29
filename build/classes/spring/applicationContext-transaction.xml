@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:tx="http://www.springframework.org/schema/tx"  
+	xsi:schemaLocation=" 
+        http://www.springframework.org/schema/beans  
+        http://www.springframework.org/schema/beans/spring-beans.xsd  
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop  
+		http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/tx   
+		http://www.springframework.org/schema/tx/spring-tx.xsd">
+        <!-- 配置事务管理器 
+        		1.需要会话工厂
+        -->
+        <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        	<property name="sessionFactory" ref="sessionFactory"></property>
+        </bean>
+        <!-- 配置切面  
+        		1.增强
+        		2.切点
+        -->
+        <aop:config proxy-target-class="false">
+        	<aop:advisor advice-ref="txAdvice" pointcut="execution(* com.crm.service.impl.*.*(..))"/>
+        </aop:config>
+        <!-- 配置增强 
+        		1、指定事务管理器 
+        -->
+        <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        	<tx:attributes>
+        		<tx:method name="save*" propagation="REQUIRED" read-only="false"/>
+				<tx:method name="update*" propagation="REQUIRED" read-only="false"/>
+				<tx:method name="edit*" propagation="REQUIRED" read-only="false"/>
+				<tx:method name="delete*" propagation="REQUIRED" read-only="false"/>
+				<tx:method name="find*" propagation="SUPPORTS" read-only="true"/>
+        	</tx:attributes>
+        </tx:advice>
+        
+        <!-- 启用自定义注解 -->
+        <!-- <aop:aspectj-autoproxy /> -->
+</beans>

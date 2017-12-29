@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+	<struts>
+		<!-- 配置开发者模式 -->
+	 	<constant name="struts.devMode" value="true"></constant>
+	 	<!-- 主题，一般不使用struts提供模板设置为simple -->
+		<constant name="struts.ui.theme" value="simple"></constant>
+	 	<!-- 配置structs默认拦截的后缀名路径 -->
+	 	<constant name="struts.action.extension" value="action,,"></constant>
+	 	
+	 	<package name="common" extends="struts-default">
+	 	
+	 		
+	 		<!-- 自定义拦截器 -->
+	 		<interceptors>
+	 			<!-- 先申明拦截器 -->
+				<interceptor name="customerInterceptor1" class="com.crm.web.action.interceptor.customerInterceptor1"></interceptor>	 		
+				<interceptor name="customerInterceptor2" class="com.crm.web.action.interceptor.customerInterceptor2"></interceptor>	 		
+				<interceptor name="loginInterceptor" class="com.crm.web.action.interceptor.LoginInterceptor"></interceptor>	 		
+				
+				<!-- 用申明后的拦截器创建一个拦截器栈 -->
+				<interceptor-stack name="customerInterceptorStack">
+					<!-- 拦截器执顺序为一次向下执行 -->					
+					<!-- <interceptor-ref name="customerInterceptor1"></interceptor-ref>
+					<interceptor-ref name="customerInterceptor2"></interceptor-ref> -->
+					<interceptor-ref name="loginInterceptor"></interceptor-ref>
+					<!-- 提供struts自身提供的默认拦截器栈 -->
+					<interceptor-ref name="defaultStack"></interceptor-ref>
+				</interceptor-stack>
+	 		</interceptors>
+	 		<!-- 使用拦截器 ：即将自己创建的拦截器申明为默认拦截器-->
+	 		<default-interceptor-ref name="customerInterceptorStack"></default-interceptor-ref>
+	 		
+	 		<global-results>
+			<result name="success" type="dispatcher">
+				/jsp/success.jsp
+			</result>
+			<result name="error" type="dispatcher">
+				/jsp/error.jsp
+			</result>
+			<!-- 登陆页面 -->
+			<result name="loginUI" type="dispatcher">
+				/login.jsp
+			</result>
+		</global-results>
+		
+		<global-exception-mappings>
+			<exception-mapping result="error" exception="com.crm.exception.BusinessException">
+			</exception-mapping>
+		</global-exception-mappings>
+	 	</package>
+	 </struts>

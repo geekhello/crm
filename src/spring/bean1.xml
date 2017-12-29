@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+      <bean id="customerService" class="com.crm.service.impl.CstCustomerServiceImpl"></bean>
+      <bean id="customerDao" class="com.crm.dao.impl.CstCustomerDaoImpl"></bean>
+      <bean id="customer" class="com.crm.domain.CstCustomer">
+      	<constructor-arg index="0" value="101"></constructor-arg>
+      	<constructor-arg index="1" value="小牛"></constructor-arg>
+      </bean>
+</beans>

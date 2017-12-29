@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+	<struts>
+	<!--  -->
+		<package name="customer" extends="common" namespace="/customer">
+			<!-- 客户信息列表展示 -->
+			<action name="listCustomer" class="customerAction" method="listCustomer">
+				<result name="listCustomer" type="dispatcher">/jsp/customer/list.jsp</result>
+			</action>
+			<!-- 添加客户信息 -->
+			<action name="addCustomer" class="customerAction" method="addCustomer">
+				<result name="addCustomer" type="redirectAction">listCustomer</result>
+			</action>
+			<!-- 添加客户信息跳转 -->
+			<action name="addCustomerUI" class="customerAction" method="addCustomerUI">
+				<result name="addCustomerUI" type="dispatcher">/jsp/customer/add.jsp</result>
+			</action>
+			<!-- 编辑客户页面的跳转 -->
+			<action name="editCustomerUI" class="customerAction" method="editCustomerUI">
+				<result name="editCustomerUI" type="dispatcher">/jsp/customer/edit.jsp</result>
+			</action>
+			<!-- 编辑客户信息 -->
+			<action name="editCustomer" class="customerAction" method="editCustomer">
+				<result name="editCustomer" type="redirectAction">listCustomer</result>
+			</action>
+			<!-- 删除客户 -->
+			<action name="removeCustomer" class="customerAction" method="removeCustomer">
+				<result name="removeCustomer" type="redirectAction">listCustomer</result>
+			</action>
+			
+			<!-- 根据客户名称模糊查询客户信息列表 -->
+			<action name="listCustomerByName" class="customerAction" method="listCustomerByName">
+				<result name="listCustomerByName" type="dispatcher">/jsp/customer/list.jsp</result>
+			</action>
+		</package>
+		
+		<package name="linkman" extends="common" namespace="/linkman" >
+			<!-- 展示联系人列表 -->
+			<action name="listLinkMan" class="linkManAction" method="listLinkMan">
+				<result name="listLinkMan" type="dispatcher">/jsp/linkman/list.jsp</result>
+			</action>
+			<!-- 添加联系人页面跳转 -->
+			<action name="addLinkManUI" class="linkManAction" method="addLinkManUI">
+				<result name="addLinkManUI" type="dispatcher">/jsp/linkman/add.jsp</result>
+			</action>
+			<!-- 添加联系人 -->
+			<action name="addLinkMan" class="linkManAction" method="addLinkMan">
+				<result name="addLinkMan" type="redirectAction">listLinkMan</result>
+			</action>
+			<!-- 编辑联系人页面跳转 -->
+			<action name="editLinkManUI" class="linkManAction" method="editLinkManUI">
+				<result name="editLinkManUI" type="dispatcher">/jsp/linkman/edit.jsp</result>
+			</action>
+			<!-- 编辑联系人信息 -->
+			<action name="editLinkMan" class="linkManAction" method="editLinkMan">
+				<result name="editLinkMan" type="redirectAction">listLinkMan</result>
+			</action>
+			<!-- 删除联系人 -->
+			<action name="deleteLinkMan" class="linkManAction" method="deleteLinkMan">
+				<result name="deleteLinkMan" type="redirectAction">listLinkMan</result>
+			</action>
+			<!-- 根据联系人名称展示联系人列表 -->
+			<action name="listLinkManByName" class="linkManAction" method="listLinkManByName">
+				<result name="listLinkManByName" type="dispatcher">/jsp/linkman/list.jsp</result>
+			</action>
+		</package>
+		
+		<package name="salevisit" extends="common" namespace="/salevisit">
+			<action name="listSaleVisit" class="saleVisitAction" method="listSaleVisit">
+			 	<result name="listSaleVisit" type="dispatcher">/jsp/salevisit/list.jsp</result>
+			</action>
+			
+			<action name="addUISaleVisit" class="saleVisitAction" method="addUISaleVisit">
+				<result name="addUISaleVisit" type="dispatcher">/jsp/salevisit/add.jsp</result>
+			</action>
+			
+			<action name="addSaleVisit" class="saleVisitAction" method="addSaleVisit">
+				<result name="addSaleVisit" type="redirectAction">listSaleVisit</result>
+			</action>
+			
+		</package>
+	</struts>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:tx="http://www.springframework.org/schema/tx"  
+	xsi:schemaLocation=" 
+        http://www.springframework.org/schema/beans  
+        http://www.springframework.org/schema/beans/spring-beans.xsd  
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop  
+		http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/tx   
+		http://www.springframework.org/schema/tx/spring-tx.xsd">
+		
+		 <!-- spring与struts整合
+        	前期准备：导入整合jar包，通过将ApplicactionContext和ServletContext绑定，实现spring对
+        		applicationContext进行单例管理
+        	第一步：将action配置到spring配置文件中
+        	第二步：配置struts2配置文件中的action元素
+        		spring和struts2整合后，struts配置文件中的Action元素的class属性的值
+        		变为spring配置文件中的bean的name或id
+         -->
+         <!-- 配置action -->
+        <bean id="customerAction" class="com.crm.web.action.CustomerAction" scope="prototype">
+        	<!-- 配置customerAction中的CstCustomerServices依赖属性 -->
+        	<property name="customerService" ref="customerService"></property>
+        </bean>
+        
+        <bean id="linkManAction" class="com.crm.web.action.LinkManAction" scope="prototype">
+        	<property name="customerService" ref="customerService"></property>
+        </bean>
+        
+        <bean id="saleVisitAction" class="com.crm.web.action.SaleVisitAction" scope="prototype">
+        	<property name="customerService" ref="customerService"></property>
+        	<property name="systemService" ref="systemService"></property>
+        </bean>
+        
+        <bean id="loginAction" class="com.crm.web.action.LoginAction" scope="prototype">
+        	<property name="systemService" ref="systemService"></property>
+        </bean>
+        
+        <bean id="systemAction" class="com.crm.web.action.SystemAction" scope="prototype">
+        	<property name="systemService" ref="systemService"></property>
+        </bean>
+        
+</beans>

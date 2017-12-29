@@ -1,0 +1,12 @@
+	<!-- 日期插件，使用jquery -->
+		<script type="text/javascript" src="${pageContext.request.contextPath}/jquery/jquery-1.4.2.js"></script>
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/jquery/jquery.datepick.css" type="text/css">
+		<script type="text/javascript" src="${pageContext.request.contextPath}/jquery/jquery.datepick.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/jquery/jquery.datepick-zh-CN.js"></script>
+	</HEAD>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			//使用class属性处理  'yy-mm-dd' 设置格式"yyyy/mm/dd"
+			$('#birthday').datepick({dateFormat: 'yy-mm-dd'}); 
+		});
+	</script>

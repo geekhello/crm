@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    <hibernate-mapping package="com.crm.domain">
+    	<class name="SysRole" table="sys_role">
+    		<id name="roleId" column="role_id">
+    			<generator class="native"></generator>
+    		</id>
+    		<property name="roleName" column="role_name"></property>
+    		<property name="roleMemo" column="role_memo"></property>
+    		<!-- 多对多关系的映射 -->
+    		<set name="sysUsers" table="sys_user_role" inverse="true" >
+            	<key>
+                	<column name="role_id" not-null="true"></column>
+	            </key>
+	            <many-to-many class="com.crm.domain.SysUser">
+	                <column name="user_id" not-null="true"></column>
+	            </many-to-many>
+       	 	</set>
+    	</class>
+    </hibernate-mapping>

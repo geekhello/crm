@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	
+ 	<class name="com.crm.domain.CstCustomer" dynamic-insert="true" dynamic-update="true" table="cst_customer" lazy="true">
+ 		<!-- 主键映射 -->
+ 		<id name="custId" column="cust_id">
+ 			<generator class="native"></generator>		
+ 		</id>
+ 		<!-- 普通字段映射 -->
+ 		<property name="custName" column="cust_name"></property>
+ 		<!--  <property name="custSource" column="cust_source"></property> -->
+ 		<property name="custIndustry" column="cust_industry"></property>
+ 		<property name="custLevel" column="cust_level"></property>
+ 		<property name="custAddress" column="cust_address"></property>
+ 		<property name="custZip" column="cust_zip"></property>
+ 		<property name="custPhone" column="cust_phone"></property>
+ 		<property name="custFax" column="cust_fax"></property>
+ 		<property name="custWebsite" column="cust_website"></property>
+ 		<property name="custCorporation" column="cust_corporation"></property>
+ 		<property name="custMemo" column="cust_memo"></property>
+ 		
+ 		<!-- 一对多关系的映射 -->
+ 		<!-- set：
+ 				作用：用于映射集合属性
+ 				属性：
+ 					name：集合属性的名称
+ 					table：集合存放实体类对应的表
+ 					inverse：放弃维护权利。默认是false：不放弃
+ 					cascade：设置级联保存更新、级联删除
+ 				元素：
+ 					key：
+ 						作用：用于映射外键
+ 						属性：
+ 							column：目标实体类对应的表中的外键字段
+ 					one-to-many：
+ 						作用：指定当前实体类与目标实体类的关系：一对多的关系
+ 						属性：
+ 							class：目标实体类的全路径名称
+ 		 -->
+ 		<set name="linkMans" table="cst_linkman" inverse="true" cascade="save-update,delete" lazy="true">
+ 			<key column="lkm_cust_id"></key>
+ 			<one-to-many class="com.crm.domain.CstLinkMan"/>
+ 		</set>
+ 		
+ 		<set name="saleVisits" table="sale_visit" inverse="true" >
+            <key>
+                <column name="visit_cust_id"></column>
+            </key>
+            <one-to-many class="com.crm.domain.SaleVisit" />
+        </set>
+ 		<!-- 多对一关系映射：多个客户对应一个客户来源 -->
+ 		<!-- 
+ 			many-to-one:
+ 				作用:指定当前实体类与引用实体类之间的关系:多对一关系
+ 				属性：
+ 					name:引用目标实体类的属性名称
+ 					class：目标实体类的全路径名称
+ 					column：外键字段（多的一方的外键字段）
+ 		 -->
+ 		<many-to-one name="baseDict" class="com.crm.domain.BaseDict" column="cust_source"  lazy="false"></many-to-one>
+ 		<many-to-one name="sysUserByCustUserId" class="com.crm.domain.SysUser" fetch="join">
+            <column name="cust_user_id"></column>
+        </many-to-one>
+        <many-to-one name="sysUserByCustCreateId" class="com.crm.domain.SysUser" fetch="join">
+            <column name="cust_create_id"></column>
+        </many-to-one>
+ 	</class>
+</hibernate-mapping>

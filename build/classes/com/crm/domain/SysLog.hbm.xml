@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    <hibernate-mapping package="com.crm.domain">
+    <!-- 实体类名和表的映射关系  -->
+    	<class name="SysLog" table="sys_log">
+    	<!-- 主键的映射关系 -->
+    		<id name="id" column="id">
+    			<generator class="native"></generator>
+    		</id>
+    		<!-- 普通字段的映射关系 -->
+    		<property name="logType" column="log_type">
+				<type name="org.hibernate.type.EnumType">  
+	                <!-- 枚举类 -->  
+	                <param name="enumClass">com.crm.constant.LogType</param>  
+	                <!-- 按枚举的名字保存 -->  
+	                <param name="useNamed">true</param>  
+	                <!--   
+	            	    按枚举的索引保存,关于"12"怎么来的,参看java.sql.Types  
+	            	-->
+	                <param name="type">12</param>  
+	                   
+            	</type>     		
+    		</property>
+    		<property name="operType" column="oper_type">
+    			 <type name="org.hibernate.type.EnumType">  
+	                <!-- 枚举类 -->  
+	                <param name="enumClass">com.crm.constant.OperateType</param>  
+	                <!-- 按枚举的名字保存 -->  
+	                <param name="useNamed">true</param>  
+	                <!--   
+	            	    按枚举的索引保存,关于"12"怎么来的,参看java.sql.Types  
+	            	-->
+	                <param name="type">12</param>  
+	                   
+            	</type>  
+    		</property>
+    		<property name="remark" column="remark"></property>
+    		<property name="operateMethod" column="operate_method"></property>
+    		<property name="args" column="args"></property>
+    		<property name="detail" column="detail"></property>
+    		<property name="userId" column="user_id"></property>
+    		<property name="realName" column="realname"></property>
+    		<property name="loginIP" column="login_ip"></property>
+    		<property name="operateTime" column="operate_time"></property>
+    		
+    	</class>
+    </hibernate-mapping>

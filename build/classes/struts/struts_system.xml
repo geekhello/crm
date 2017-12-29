@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+	<struts>
+		<package name="login" extends="common">
+			<action name="login" class="loginAction" method="login">
+	 			<result name="login" type="redirect">/</result>
+	 			<result name="input">/login.jsp</result>
+	 		</action>
+	 		
+	 		<action name="logout" class="loginAction" method="logout">
+	 			<result name="logout" type="redirect">/</result>
+	 		</action>
+		</package>
+		
+		<package name="system" extends="common" namespace="/system">
+			<action name="listSysUser" class="systemAction" method="listSysUser">
+				<result name="listSysUser">/jsp/sys/listUser.jsp</result>
+			</action>
+			
+			<action name="removeSysUser" class="" method="deleteSysUser">
+				<result name="deleteSysUser" type="redirectAction">listSysUser</result>
+			</action>
+			
+			<action name="listSysRole" class="systemAction" method="listSysRole">
+				<result name="listSysRole">/jsp/sys/listRole.jsp</result>
+			</action>
+			
+			<action name="listSysUserByCondition" class="systemAction" method="listSysUserByCondition">
+				<result name="listSysUserByCondition">listSysUser</result>
+			</action>
+		</package>
+	</struts>
